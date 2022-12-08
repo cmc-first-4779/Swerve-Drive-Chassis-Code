@@ -6,6 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+
+import com.swervedrivespecialties.swervelib.SwerveModule;
+
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
@@ -13,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.sturdyBaseCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
@@ -22,6 +26,10 @@ import frc.robot.subsystems.DrivetrainSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  SwerveModule m_frontLeftModule;
+  SwerveModule m_frontRightModule;
+  SwerveModule m_backLeftModule;
+  SwerveModule m_backRightModule;
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
 
@@ -54,6 +62,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new JoystickButton(m_controller, 2).whileHeld(new sturdyBaseCommand(m_drivetrainSubsystem, m_frontLeftModule, m_frontRightModule, m_backLeftModule, m_backRightModule));
     // Back button zeros the gyroscope
     new Button(m_controller::getBackButton)
             // No requirements because we don't need to interrupt anything
