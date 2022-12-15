@@ -229,6 +229,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
                 // Moving this line into the drive() method
                 // SwerveModuleState[] states =
                 // m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
+                if (states == null) {
+                        return;
+                }
                 SwerveDriveKinematics.desaturateWheelSpeeds(states, MAX_VELOCITY_METERS_PER_SECOND);
 
                 m_frontLeftModule.set(states[0].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,
