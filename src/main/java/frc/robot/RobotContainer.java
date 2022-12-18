@@ -26,13 +26,16 @@ import frc.robot.subsystems.DrivetrainSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  //Declare SwerveModules from SDSSwerveLib's.
   SwerveModule m_frontLeftModule;
   SwerveModule m_frontRightModule;
   SwerveModule m_backLeftModule;
   SwerveModule m_backRightModule;
   // The robot's subsystems and commands are defined here...
+  //  Declare the DriveTrainSubsystem
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-
+  //  Declare the Xbox Controller 
   private final XboxController m_controller = new XboxController(0);
 
   /**
