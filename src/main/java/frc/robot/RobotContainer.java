@@ -87,7 +87,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
         // 1. Create trajectory settings
         TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND_TRAJECTORY,
                 DrivetrainSubsystem.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
                         .setKinematics(Constants.kDriveKinematics);
 
@@ -96,8 +96,10 @@ public class RobotContainer {
                 new Pose2d(0, 0, new Rotation2d(0)),
                 List.of(
                         new Translation2d(1, 0),
-                        new Translation2d(1, -1)),
-                new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
+                        // new Translation2d(1, -1)),
+                        new Translation2d(1, Rotation2d.fromDegrees(-90))),
+                new Pose2d(0, 0, Rotation2d.fromDegrees(-45)),
+
                 trajectoryConfig);
 
         // 3. Define PID controllers for tracking trajectory

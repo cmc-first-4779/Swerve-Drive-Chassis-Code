@@ -50,10 +50,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         public static final double MAX_VELOCITY_METERS_PER_SECOND = 6380.0 / 60.0 *
                         SdsModuleConfigurations.MK4_L1.getDriveReduction() *
                         SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
+        public static final double MAX_VELOCITY_METERS_PER_SECOND_TRAJECTORY = 6380.0 / 60.0 *
+                        SdsModuleConfigurations.MK4_L1.getDriveReduction() *
+                        SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
 
         // Max acceleration needed for TrajectoryConfig constructor. Using value from 0
         // to Autonomous example
-        public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3.0;
+        public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3.0; //original line of code
+        // public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 1.5;
 
         /**
          * The maximum angular velocity of the robot in radians per second.
