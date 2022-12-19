@@ -21,6 +21,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -91,8 +93,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // private final AHRS m_navx = new AHRS(SPI.Port.kMXP, (byte) 200); // NavX
         // connected over MXP
 
-        private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(Constants.kDriveKinematics,
+        private final SwerveDriveOdometry odometery = new SwerveDriveOdometry(Constants.kDriveKinematics,
         new Rotation2d(0));
+
+        private final Field2d field = new Field2d();
 
         // These are our modules. We initialize them in the constructor.
         public SwerveModule m_frontLeftModule;
@@ -106,6 +110,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         public DrivetrainSubsystem() {
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
+                SmartDashboard.putData("Field", field);
 
                 // There are 4 methods you can call to create your swerve modules.
                 // The method you use depends on what motors you are using.
@@ -233,6 +238,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
                 // Moving this line into the drive() method
                 // SwerveModuleState[] states =
                 // m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
+
+                // Trying update robot position on field image on dashboard
+                field.setRobotPose(odometery.getPoseMeters());
+
                 if (states == null) {
                         return;
                 }
@@ -253,12 +262,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
          * @return
          */
         public Pose2d getPose() {
-                return odometer.getPoseMeters();
+                return odometery.getPoseMeters();
             }
 
 
             public void resetOdometry(Pose2d pose) {
-                odometer.resetPosition(pose, getRotation2d());
+                odometery.resetPosition(pose, getRotation2d());
             }
 
             public void stopModules() {
