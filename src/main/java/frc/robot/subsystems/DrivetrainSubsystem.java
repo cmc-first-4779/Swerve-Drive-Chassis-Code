@@ -96,6 +96,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         private final SwerveDriveOdometry odometery = new SwerveDriveOdometry(Constants.kDriveKinematics,
         new Rotation2d(0));
 
+        // Field object to keep track of location of bot. 
         private final Field2d field = new Field2d();
 
         // These are our modules. We initialize them in the constructor.
