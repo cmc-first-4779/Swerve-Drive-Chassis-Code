@@ -17,6 +17,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.balanceTest;
 import frc.robot.commands.sturdyBaseCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -76,7 +78,8 @@ public class RobotContainer {
     new Button(m_controller::getBackButton)
             // No requirements because we don't need to interrupt anything
             .whenPressed(m_drivetrainSubsystem::zeroGyroscope);
-    new JoystickButton(m_controller, 1).whenPressed(m_drivetrainSubsystem::zeroGyroscope);
+    new JoystickButton(m_controller, 1).whenPressed(m_drivetrainSubsystem::zeroGyroscope); // This button is A on the controller
+    new JoystickButton(m_controller, 2).whileHeld(new balanceTest(m_drivetrainSubsystem)); // This button is B on the controller
   }
 
   /**

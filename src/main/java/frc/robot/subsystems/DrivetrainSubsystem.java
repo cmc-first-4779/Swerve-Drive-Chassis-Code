@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -88,7 +89,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // cause the angle reading to increase until it wraps back over to zero.
         // Don't Remove following if you are using a Pigeon
         // private final PigeonIMU m_pigeon = new PigeonIMU(DRIVETRAIN_PIGEON_ID);
-        private final Pigeon2 m_pigeon = new Pigeon2(DRIVETRAIN_PIGEON_ID);
+        Pigeon2 m_pigeon = new Pigeon2(DRIVETRAIN_PIGEON_ID);
         // Uncomment following if you are using a NavX
         // private final AHRS m_navx = new AHRS(SPI.Port.kMXP, (byte) 200); // NavX
         // connected over MXP
@@ -283,5 +284,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
         
             public Rotation2d getRotation2d() {
                 return Rotation2d.fromDegrees(getHeading());
+            }
+            public double getPitch() {
+                return m_pigeon.getPitch();
+            }
+            public void driveStraightSlow() {
+                m_frontLeftModule.set(4, 0);
+                m_frontRightModule.set(4, 0);;
+                m_backLeftModule.set(4, 0);;
+                m_backRightModule.set(4, 0);
+            }
+            public void sturdyBase() {
+                m_backRightModule.set(0, 45);;
+                m_backLeftModule.set(0, -45);;
+                m_frontRightModule.set(0, -45);;
+                m_frontLeftModule.set(0, 45);;
             }
 }
