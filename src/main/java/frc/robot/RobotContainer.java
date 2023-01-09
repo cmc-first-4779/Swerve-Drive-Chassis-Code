@@ -73,13 +73,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_controller, 2).whileHeld(new sturdyBaseCommand(m_drivetrainSubsystem, m_frontLeftModule, m_frontRightModule, m_backLeftModule, m_backRightModule));
+    new JoystickButton(m_controller, 2).whileHeld(new sturdyBaseCommand(m_drivetrainSubsystem, m_frontLeftModule, m_frontRightModule, m_backLeftModule, m_backRightModule)); // This button is B on the controller
     // Back button zeros the gyroscope
     new Button(m_controller::getBackButton)
             // No requirements because we don't need to interrupt anything
             .whenPressed(m_drivetrainSubsystem::zeroGyroscope);
     new JoystickButton(m_controller, 1).whenPressed(m_drivetrainSubsystem::zeroGyroscope); // This button is A on the controller
-    new JoystickButton(m_controller, 2).whileHeld(new balanceTest(m_drivetrainSubsystem)); // This button is B on the controller
+    new JoystickButton(m_controller, 3).whileHeld(new balanceTest(m_drivetrainSubsystem)); // This button is X on the controller
   }
 
   /**
