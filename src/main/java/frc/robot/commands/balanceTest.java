@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -28,6 +29,7 @@ public class balanceTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("Robot Pitch", m_pigeonPitch);
     if (m_pigeonPitch >= Constants.PIGEON_DEADBAND) {
        m_drive.driveStraightSlow();
     }
