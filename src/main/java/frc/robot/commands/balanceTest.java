@@ -22,14 +22,12 @@ public class balanceTest extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_pigeonPitch = m_drive.getPitch();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Robot Pitch", m_pigeonPitch);
+    m_pigeonPitch = m_drive.getPitch();
     if (m_pigeonPitch >= Constants.PIGEON_DEADBAND) {
        m_drive.driveStraightSlow();
     }

@@ -90,6 +90,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // Don't Remove following if you are using a Pigeon
         // private final PigeonIMU m_pigeon = new PigeonIMU(DRIVETRAIN_PIGEON_ID);
         Pigeon2 m_pigeon = new Pigeon2(DRIVETRAIN_PIGEON_ID);
+        Double m_pigeonPitch;
+        Double m_pigeonYaw;
+        Double m_pigeonRoll;
         // Uncomment following if you are using a NavX
         // private final AHRS m_navx = new AHRS(SPI.Port.kMXP, (byte) 200); // NavX
         // connected over MXP
@@ -219,6 +222,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
                 // counter-clockwise makes the angle increase.
                 // return Rotation2d.fromDegrees(360.0 - m_navx.getYaw());
         }
+        public Rotation2d getGyroscopePitch() {
+            return Rotation2d.fromDegrees(m_pigeon.getPitch());
+        }
+
+        public Rotation2d getGyroscopeRoll() {
+            return Rotation2d.fromDegrees(m_pigeon.getRoll());
+        }
 
         public void drive(ChassisSpeeds chassisSpeeds) {
                 m_chassisSpeeds = chassisSpeeds;
@@ -237,6 +247,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         @Override
         public void periodic() {
+           m_pigeonPitch = m_pigeon.getPitch();
+           m_pigeonYaw = m_pigeon.getYaw();
+           m_pigeonRoll = m_pigeon.getRoll();
+            SmartDashboard.putNumber("Robot Pitch", m_pigeonPitch);
+            SmartDashboard.putNumber("Robot Yaw", m_pigeonYaw);
+            SmartDashboard.putNumber("Robot Roll", m_pigeonRoll);
+            SmartDashboard.updateValues();
                 // Moving this line into the drive() method
                 // SwerveModuleState[] states =
                 // m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
@@ -289,11 +306,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
             public double getPitch() {
                 return m_pigeon.getPitch();
             }
+            public double getRoll() {
+                return m_pigeon.getRoll();
+            }
             public void driveStraightSlow() {
-                m_frontLeftModule.set(4, 0);
-                m_frontRightModule.set(4, 0);;
-                m_backLeftModule.set(4, 0);;
-                m_backRightModule.set(4, 0);
+                m_frontLeftModule.set(2, 0);
+                m_frontRightModule.set(2, 0);;
+                m_backLeftModule.set(2, 0);;
+                m_backRightModule.set(2, 0);
             }
             public void sturdyBase() {
                 m_backRightModule.set(0, 45);;
